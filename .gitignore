@@ -1,0 +1,6 @@
+.idea
+.env
+.vs
+DocumentRoot
+!DocumentRoot/.gitkeep
+!DocumentRoot/index.php
