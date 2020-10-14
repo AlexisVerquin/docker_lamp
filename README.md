@@ -5,11 +5,13 @@ This docker contain a Linux Apache Mysql PHP enviroment
 * [Docker V3](https://www.docker.com/)
 
 ## Installation
-    git clone http://kim.alexis-verquin.fr:3000/Alexis/docker_lamp.git
+    git clone https://github.com/AlexisVerquin/docker_lamp.git
     cd docker_lamp
+    docker-compose build
 
 ## Usage
-Modify the variables in **docker-compose.yml**  according to your needs
+Modify the variables in **docker-compose.yml** and **.env**  according to your needs
+
 
 Start Docker and Detach
     
