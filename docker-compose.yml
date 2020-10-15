@@ -11,6 +11,14 @@ services:
       - ${PORT_HTTP}:80
     networks:
       - lamp
+    depends_on:
+      - db
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - ${PORT_MAILHOG_HTTP}:8025
+    networks:
+      - lamp
   db:
     container_name: lamp_db
     image: mysql:8.0
