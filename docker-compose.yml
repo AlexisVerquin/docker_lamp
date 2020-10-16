@@ -5,7 +5,7 @@ services:
     build:
       context: ./docker/apache
     volumes:
-      - ./DocumentRoot:/var/www/html
+      - ./DocumentRoot:/app
       - ./docker/php/custom.ini:/usr/local/etc/php/conf.d/custom.ini
     ports:
       - ${PORT_HTTP}:80
