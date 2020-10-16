@@ -38,7 +38,7 @@ services:
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASS}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
-  phmyadmin:
+  phpmyadmin:
     container_name: lamp_pmd
     image: phpmyadmin/phpmyadmin
     links:
