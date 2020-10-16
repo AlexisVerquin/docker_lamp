@@ -1,4 +1,4 @@
-# DOCKER LAMP
+# DOCKER LAMP BY VERANET
 This docker contain a Linux Apache Mysql PHP enviroment
 
 ## Prerequisites
