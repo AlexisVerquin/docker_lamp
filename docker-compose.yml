@@ -6,15 +6,18 @@ services:
       context: ./docker/apache
     volumes:
       - ./DocumentRoot:/app
+      - ./docker/apache/errors:/errors
       - ./docker/php/custom.ini:/usr/local/etc/php/conf.d/custom.ini
     ports:
       - ${PORT_HTTP}:80
+      - ${PORT_HTTPS}:443
     networks:
       - lamp
     depends_on:
       - db
   mailhog:
     image: mailhog/mailhog
+    container_name: lamp_mailhog
     ports:
       - ${PORT_MAILHOG_HTTP}:8025
     networks:
@@ -51,9 +54,24 @@ services:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
     networks:
       - lamp
+  redis:
+    image: "redis:alpine"
+    container_name: lamp_redis
+    command: redis-server --requirepass ${REDIS_PASS}
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./redis-data:/var/lib/redis
+      - ./docker/redis/redis.conf:/usr/local/etc/redis/redis.conf
+    environment:
+      - REDIS_REPLICATION_MODE=master
+    networks:
+      - lamp
+        
 volumes:
   persistent:
+  redis-data:
+
 networks:
   lamp:
-
 
