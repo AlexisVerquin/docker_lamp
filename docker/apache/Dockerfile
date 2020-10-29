@@ -42,8 +42,12 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # INstall Apache Modules
 RUN a2enmod rewrite
 
+RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/apache-selfsigned.key -out /etc/ssl/certs/apache-selfsigned.crt -subj "/C=FR/ST=France/L=Lille/O=Veranet/OU=IT Department/CN=localhost"
+
 COPY conf/vhost.conf /etc/apache2/sites-available/000-default.conf
 COPY conf/ssl.conf /etc/apache2/sites-available/ssl-default.conf
 COPY conf/apache.conf /etc/apache2/conf-available/z-app.conf
-COPY ssl/* /usr/local/apache/conf/
+#COPY ssl/apache-selfsigned.crt /etc/ssl/certs/apache-selfsigned.crt
+#COPY ssl/apache-selfsigned.key /etc/ssl/private/apache-selfsigned.key
 RUN a2enconf z-app
+RUN a2ensite ssl-default.conf
