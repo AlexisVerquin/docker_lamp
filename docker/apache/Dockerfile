@@ -34,7 +34,8 @@ RUN apt-get update -qq && \
     git \
     gnupg \
     unzip \
-    zip
+    zip \
+    webp
 
 #Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
