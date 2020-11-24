@@ -1,7 +1,8 @@
 .idea
 .env
 .vs
-DocumentRoot
-!DocumentRoot/.gitkeep
-!DocumentRoot/index.php
-!DocumentRoot/errors
+/DocumentRoot
+!/DocumentRoot/.gitkeep
+!/DocumentRoot/index.php
+!/DocumentRoot/errors
+
