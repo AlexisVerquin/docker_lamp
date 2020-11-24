@@ -4,10 +4,24 @@ This docker contain a Linux Apache Mysql PHP enviroment
 ## Prerequisites
 * [Docker V3](https://www.docker.com/)
 
+## Services
+* Apache2
+* Mysql-8.0
+* PhpMyAdmin
+* Mailhog
+* Redis
+
+
 ## Installation
     git clone https://github.com/AlexisVerquin/docker_lamp.git
     cd docker_lamp
-    docker-compose build
+    
+Rename or copy **.env.example** file to **.env**
+
+Modify the variables in **docker-compose.yml** and **.env** according to your needs
+    
+    docker-compose up --build
+    
 
 ## Usage
 Modify the variables in **docker-compose.yml** and **.env**  according to your needs
