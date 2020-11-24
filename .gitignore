@@ -4,3 +4,4 @@
 DocumentRoot
 !DocumentRoot/.gitkeep
 !DocumentRoot/index.php
+!DocumentRoot/errors

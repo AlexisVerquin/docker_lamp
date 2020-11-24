@@ -48,7 +48,6 @@ RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private
 COPY conf/vhost.conf /etc/apache2/sites-available/000-default.conf
 COPY conf/ssl.conf /etc/apache2/sites-available/ssl-default.conf
 COPY conf/apache.conf /etc/apache2/conf-available/z-app.conf
-#COPY ssl/apache-selfsigned.crt /etc/ssl/certs/apache-selfsigned.crt
-#COPY ssl/apache-selfsigned.key /etc/ssl/private/apache-selfsigned.key
-RUN a2enconf z-app
+
+RUN a2enconf z-app.conf
 RUN a2ensite ssl-default.conf
