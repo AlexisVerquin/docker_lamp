@@ -13,6 +13,14 @@ This docker contain a Linux Apache Mysql PHP enviroment
 * Redis
 
 
+## Services
+* Apache2
+* Mysql-8.0
+* PhpMyAdmin
+* Mailhog
+* Redis
+
+
 ## Installation
     git clone https://github.com/AlexisVerquin/docker_lamp.git
     cd docker_lamp
