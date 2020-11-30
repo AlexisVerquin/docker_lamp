@@ -12,7 +12,8 @@ RUN a2enmod ssl \
 
 # Install PHP modules
 RUN docker-php-ext-install  pdo pdo_mysql \
-    && docker-php-ext-enable  pdo pdo_mysql
+    && docker-php-ext-enable  pdo pdo_mysql \
+    && docker-php-ext-install mysqli && docker-php-ext-enable mysqli
 
 # mhsendmail dependencies
 RUN apt-get update -y && apt-get install -y --no-install-recommends \
