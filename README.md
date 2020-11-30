@@ -3,6 +3,15 @@ This docker contain a Linux Apache Mysql PHP enviroment
 
 ## Prerequisites
 * [Docker V3](https://www.docker.com/)
+* [Docker Compose](https://docs.docker.com/compose/install/)
+
+## Services
+* Apache2
+* Mysql-8.0
+* PhpMyAdmin
+* Mailhog
+* Redis
+
 
 ## Services
 * Apache2
@@ -21,7 +30,6 @@ Rename or copy **.env.example** file to **.env**
 Modify the variables in **docker-compose.yml** and **.env** according to your needs
     
     docker-compose up --build
-    
 
 ## Usage
 Modify the variables in **docker-compose.yml** and **.env**  according to your needs
