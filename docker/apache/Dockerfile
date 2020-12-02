@@ -11,9 +11,17 @@ RUN a2enmod ssl \
  && a2ensite default-ssl
 
 # Install PHP modules
+RUN apt-get update -y && apt-get install -y libpng-dev
+
+RUN apt-get update && \
+    apt-get install -y \
+        zlib1g-dev 
+
+
 RUN docker-php-ext-install  pdo pdo_mysql \
     && docker-php-ext-enable  pdo pdo_mysql \
-    && docker-php-ext-install mysqli && docker-php-ext-enable mysqli
+    && docker-php-ext-install mysqli && docker-php-ext-enable mysqli \ 
+    && docker-php-ext-install gd
 
 # mhsendmail dependencies
 RUN apt-get update -y && apt-get install -y --no-install-recommends \
@@ -21,7 +29,7 @@ RUN apt-get update -y && apt-get install -y --no-install-recommends \
     git
 
 #FOR DEV
-#RUN apt-get install -y --no-install-recommends nmap iputils-ping
+RUN apt-get install -y --no-install-recommends nmap iputils-ping vim
 
 # mhsendmail
 RUN GOPATH=$HOME/go \
