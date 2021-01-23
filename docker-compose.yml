@@ -20,6 +20,7 @@ services:
     container_name: lamp_mailhog
     ports:
       - ${PORT_MAILHOG_HTTP}:8025
+      - ${PORT_MAILHOG_SMTP}:1025
     networks:
       - lamp
   db:
@@ -67,11 +68,10 @@ services:
       - REDIS_REPLICATION_MODE=master
     networks:
       - lamp
-        
+
 volumes:
   persistent:
   redis-data:
 
 networks:
   lamp:
-
