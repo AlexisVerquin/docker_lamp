@@ -13,13 +13,10 @@ RUN a2enmod ssl \
 # Install PHP modules
 RUN apt-get update -y && apt-get install -y libpng-dev
 
-# Install Node
-RUN apt-get install nodejs -y
 
 RUN apt-get update && \
     apt-get install -y \
         zlib1g-dev 
-
 
 RUN docker-php-ext-install  pdo pdo_mysql \
     && docker-php-ext-enable  pdo pdo_mysql \

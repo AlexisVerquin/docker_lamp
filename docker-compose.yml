@@ -1,5 +1,15 @@
 version: "3"
 services:
+  nodejs:
+    container_name: lamp_node
+    build: 
+      context: ./docker/nodejs
+    ports: 
+      - 3030:3030
+    networks: 
+      - lamp
+    depends_on: 
+      - db
   web:
     container_name: lamp_web
     build:
