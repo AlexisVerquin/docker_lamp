@@ -6,3 +6,4 @@ DocumentRoot/*
 !DocumentRoot/index.php
 !DocumentRoot/errors
 docker/nodejs/node_modules/*
+NodeJsApp/*
