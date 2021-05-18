@@ -1,5 +1,6 @@
-ARG phpver=7.4
-FROM php:7.4-apache
+ARG php_version
+
+FROM php:$php_version
 
 # Install SSL
 RUN apt-get update \
