@@ -80,10 +80,34 @@ services:
       - REDIS_REPLICATION_MODE=master
     networks:
       - lamp
-
+  gitea:
+    image: gitea/gitea:1.14.2
+    container_name: gitea
+    environment:
+      - USER_UID=1000
+      - USER_GID=1000
+      - GITEA__database__DB_TYPE=mysql
+      - GITEA__database__HOST=db:3306
+      - GITEA__database__NAME=${MYSQL_USER}
+      - GITEA__database__USER=${MYSQL_PASS}
+      - GITEA__database__PASSWD=${MYSQL_DATABASE}
+    restart: always
+    networks:
+      - lamp
+    volumes:
+      - ./gitea:/data
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "3000:3000"
+      - "2222:22"
+    depends_on:
+      - db
 volumes:
   persistent:
   redis-data:
+  gitea:
+    driver: local
 
 networks:
   lamp:
