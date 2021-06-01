@@ -11,6 +11,7 @@ This docker contain a Linux Apache Mysql PHP enviroment
 * PhpMyAdmin
 * Mailhog
 * Redis
+* GITEA (MASTER BRANCH ONLY)
 
 
 ## Services
@@ -19,6 +20,7 @@ This docker contain a Linux Apache Mysql PHP enviroment
 * PhpMyAdmin
 * Mailhog
 * Redis
+* GITEA (MASTER BRANCH ONLY)
 
 
 ## Installation
