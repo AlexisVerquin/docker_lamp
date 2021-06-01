@@ -6,3 +6,4 @@ DocumentRoot/*
 !DocumentRoot/errors
 docker/nodejs/node_modules/*
 NodeJsApp/*
+.env
