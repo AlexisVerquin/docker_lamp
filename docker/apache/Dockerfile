@@ -27,10 +27,10 @@ RUN docker-php-ext-install  pdo pdo_mysql \
 # mhsendmail dependencies
 RUN apt-get update -y && apt-get install -y --no-install-recommends \
     golang-go \
-    git
-
-#FOR DEV
-RUN apt-get install -y --no-install-recommends nmap iputils-ping vim
+    git \ 
+    nmap \
+    iputils-ping \
+    vim 
 
 # mhsendmail
 RUN GOPATH=$HOME/go \
