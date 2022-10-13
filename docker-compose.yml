@@ -37,7 +37,6 @@ services:
       - lamp
   db:
     container_name: ${NAME_ENV}_db
-    container_name: lamp_db
     build:
       context: ./docker/mysql
     ports:
