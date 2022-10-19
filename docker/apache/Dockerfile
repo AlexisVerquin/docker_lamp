@@ -55,11 +55,12 @@ RUN a2enmod rewrite
 
 RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/apache-selfsigned.key -out /etc/ssl/certs/apache-selfsigned.crt -subj "/C=FR/ST=France/L=Lille/O=Veranet/OU=IT Department/CN=localhost"
 
-COPY conf/vhost.conf /etc/apache2/sites-available/000-default.conf
-COPY conf/ssl.conf /etc/apache2/sites-available/ssl-default.conf
-COPY conf/apache.conf /etc/apache2/conf-available/z-app.conf
-COPY conf/veranet.conf /etc/apache2/sites-available/veranet.conf
+RUN mkdir /usr/tools
+COPY activator.sh /usr/tools/activator.sh
+COPY sites-availables/ /etc/apache2/sites-available/
+COPY conf/ /etc/apache2/conf-available/
+RUN sh /usr/tools/activator.sh
 
-RUN a2ensite veranet.conf
-RUN a2enconf z-app.conf
-RUN a2ensite ssl-default.conf
+#RUN find /etc/apache2/sites-available/ -type f -and -not -name "*default*" -exec a2ensite {} \;
+#RUN find /etc/apache2/conf-available/ -type f -and -not -name "*default*" -exec a2enconf {} \;
+# RUN a2enconf app.conf

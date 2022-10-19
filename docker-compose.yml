@@ -1,90 +1,93 @@
-version: "3"
+version: '3'
 services:
   nodejs:
-    container_name: ${NAME_ENV}_node
-    build: 
+    container_name: '${NAME_ENV}_node'
+    build:
       context: ./docker/nodejs
-    ports: 
-      - ${PORT_NODE_WEB}:3030
-    networks: 
+    ports:
+      - '${PORT_NODE_WEB}:3030'
+    networks:
       - lamp
-    depends_on: 
+    depends_on:
       - db
   web:
-    container_name: ${NAME_ENV}_web
+    container_name: '${NAME_ENV}_web'
+    restart: always
     build:
       context: ./docker/apache
       args:
-        php_version: ${PHP_VERSION}
+        php_version: '${PHP_VERSION}'
     volumes:
-      - ./DocumentRoot:/app
-      - ./docker/apache/errors:/errors
-      - ./docker/php/custom.ini:/usr/local/etc/php/conf.d/custom.ini
+      - './DocumentRoot:/app'
+      - './docker/apache/errors:/errors'
+      - './docker/php/custom.ini:/usr/local/etc/php/conf.d/custom.ini'
     ports:
-      - ${PORT_HTTP}:80
-      - ${PORT_HTTPS}:443
+      - '${PORT_HTTP}:80'
+      - '${PORT_HTTPS}:443'
     networks:
       - lamp
     depends_on:
       - db
   mailhog:
     image: mailhog/mailhog
-    container_name: ${NAME_ENV}_mailhog
+    container_name: '${NAME_ENV}_mailhog'
+    restart: always
     ports:
-      - ${PORT_MAILHOG_HTTP}:8025
-      - ${PORT_MAILHOG_SMTP}:1025
+      - '${PORT_MAILHOG_HTTP}:8025'
+      - '${PORT_MAILHOG_SMTP}:1025'
     networks:
       - lamp
   db:
-    container_name: ${NAME_ENV}_db
+    container_name: '${NAME_ENV}_db'
+    restart: always
     build:
       context: ./docker/mysql
     ports:
-      - ${PORT_SQL}:3306
-    command: --default-authentication-plugin=mysql_native_password
+      - '${PORT_SQL}:3306'
+    command: '--default-authentication-plugin=mysql_native_password'
     volumes:
-      - ./dump:/docker-entrypoint-initdb.d
-      - ./docker/mysql/conf:/etc/mysql/conf.d
-      - persistent:/var/lib/mysql
+      - './dump:/docker-entrypoint-initdb.d'
+      - './docker/mysql/conf:/etc/mysql/conf.d'
+      - 'persistent:/var/lib/mysql'
     networks:
       - lamp
     environment:
-      TZ: ${TZ}
-      MYSQL_ALLOW_EMPTY_PASSWORD: ${MYSQL_ALLOW_EMPTY_PASSWORD}
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASS}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      TZ: '${TZ}'
+      MYSQL_ALLOW_EMPTY_PASSWORD: '${MYSQL_ALLOW_EMPTY_PASSWORD}'
+      MYSQL_ROOT_PASSWORD: '${MYSQL_ROOT_PASSWORD}'
+      MYSQL_USER: '${MYSQL_USER}'
+      MYSQL_PASSWORD: '${MYSQL_PASS}'
+      MYSQL_DATABASE: '${MYSQL_DATABASE}'
   phpmyadmin:
-    container_name: ${NAME_ENV}_phpmyadmin
+    container_name: '${NAME_ENV}_phpmyadmin'
+    restart: always
     image: phpmyadmin/phpmyadmin
     links:
-      - db:db
+      - 'db:db'
     ports:
-    - ${PORT_PHPMYADM}:80
+      - '${PORT_PHPMYADM}:80'
     environment:
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASS}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: '${MYSQL_USER}'
+      MYSQL_PASSWORD: '${MYSQL_PASS}'
+      MYSQL_DATABASE: '${MYSQL_DATABASE}'
     networks:
       - lamp
   redis:
-    image: "redis:alpine"
-    container_name: ${NAME_ENV}_redis
-    command: redis-server --requirepass ${REDIS_PASS}
+    image: 'redis:alpine'
+    restart: always
+    container_name: '${NAME_ENV}_redis'
+    command: 'redis-server --requirepass ${REDIS_PASS}'
     ports:
-      - "${REDIS_PORT}:6379"
+      - '${REDIS_PORT}:6379'
     volumes:
-      - ./redis-data:/var/lib/redis
-      - ./docker/redis/redis.conf:/usr/local/etc/redis/redis.conf
+      - './redis-data:/var/lib/redis'
+      - './docker/redis/redis.conf:/usr/local/etc/redis/redis.conf'
     environment:
       - REDIS_REPLICATION_MODE=master
     networks:
       - lamp
 volumes:
-  persistent:
-  redis-data:
-
+  persistent: null
+  redis-data: null
 networks:
   lamp:
-    name: ${NAME_ENV}
