@@ -13,6 +13,7 @@ services:
   web:
     container_name: '${NAME_ENV}_web'
     restart: always
+
     build:
       context: ./docker/apache
       args:
@@ -40,6 +41,7 @@ services:
   db:
     container_name: '${NAME_ENV}_db'
     restart: always
+
     build:
       context: ./docker/mysql
     ports:
@@ -49,6 +51,7 @@ services:
       - './dump:/docker-entrypoint-initdb.d'
       - './docker/mysql/conf:/etc/mysql/conf.d'
       - 'persistent:/var/lib/mysql'
+
     networks:
       - lamp
     environment:
@@ -61,6 +64,7 @@ services:
   phpmyadmin:
     container_name: '${NAME_ENV}_phpmyadmin'
     restart: always
+
     image: phpmyadmin/phpmyadmin
     links:
       - 'db:db'
@@ -77,6 +81,7 @@ services:
     restart: always
     container_name: '${NAME_ENV}_redis'
     command: 'redis-server --requirepass ${REDIS_PASS}'
+
     ports:
       - '${REDIS_PORT}:6379'
     volumes:
