@@ -1,5 +1,6 @@
 # DOCKER LAMP BY VERANET
 This docker contain a Linux Apache Mysql PHP enviroment
+(Other Language Soon)
 
 ## Prerequisites
 * [Docker V3](https://www.docker.com/)
@@ -7,19 +8,12 @@ This docker contain a Linux Apache Mysql PHP enviroment
 
 ## Services
 * Apache2
+* PHP
 * Mysql-8.0
 * PhpMyAdmin
 * Mailhog
 * Redis
-
-
-## Services
-* Apache2
-* Mysql-8.0
-* PhpMyAdmin
-* Mailhog
-* Redis
-
+* GITEA (MASTER BRANCH ONLY)
 
 ## Installation
     git clone https://github.com/AlexisVerquin/docker_lamp.git
@@ -27,13 +21,8 @@ This docker contain a Linux Apache Mysql PHP enviroment
     
 Rename or copy **.env.example** file to **.env**
 
-Modify the variables in **docker-compose.yml** and **.env** according to your needs
-    
-    docker-compose up --build
-
 ## Usage
-Modify the variables in **docker-compose.yml** and **.env**  according to your needs
-
+Modify the variables in **.env**  according to your needs
 
 Start Docker and Detach
     
@@ -86,6 +75,7 @@ Stop all images
         #
     
     ```
+
 
     
         
