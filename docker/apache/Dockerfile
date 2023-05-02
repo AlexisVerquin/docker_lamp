@@ -56,11 +56,20 @@ RUN a2enmod rewrite
 RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/apache-selfsigned.key -out /etc/ssl/certs/apache-selfsigned.crt -subj "/C=FR/ST=France/L=Lille/O=Veranet/OU=IT Department/CN=localhost"
 
 RUN mkdir /usr/tools
-COPY activator.sh /usr/tools/activator.sh
 COPY sites-availables/ /etc/apache2/sites-available/
 COPY conf/ /etc/apache2/conf-available/
-RUN sh /usr/tools/activator.sh
 
-#RUN find /etc/apache2/sites-available/ -type f -and -not -name "*default*" -exec a2ensite {} \;
-#RUN find /etc/apache2/conf-available/ -type f -and -not -name "*default*" -exec a2enconf {} \;
-# RUN a2enconf app.conf
+RUN for file in /etc/apache2/sites-available/*; do \
+        if [ -f "$file" ]; then \
+            a2ensite $(basename "$file"); \
+        fi; \
+    done
+
+RUN for file in /etc/apache2/conf-available/*; do \
+        if [ -f "$file" ]; then \
+            a2enconf $(basename "$file"); \
+        fi; \
+    done
+
+CMD ["apachectl", "-D", "FOREGROUND"]
+

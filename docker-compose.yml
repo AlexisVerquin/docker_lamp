@@ -1,15 +1,15 @@
 version: '3'
 services:
-  nodejs:
-    container_name: '${NAME_ENV}_node'
-    build:
-      context: ./docker/nodejs
-    ports:
-      - '${PORT_NODE_WEB}:3030'
-    networks:
-      - lamp
-    depends_on:
-      - db
+  # nodejs:
+  # container_name: '${NAME_ENV}_node'
+  #  build:
+  #    context: ./docker/nodejs
+  #  ports:
+  #    - '${PORT_NODE_WEB}:3030'
+  #  networks:
+  #    - lamp
+  #  depends_on:
+  #    - db
   web:
     container_name: '${NAME_ENV}_web'
     restart: always
@@ -19,7 +19,7 @@ services:
       args:
         php_version: '${PHP_VERSION}'
     volumes:
-      - './DocumentRoot:/app'
+      - './DocumentRoot:/var/www/html'
       - './docker/apache/errors:/errors'
       - './docker/php/custom.ini:/usr/local/etc/php/conf.d/custom.ini'
     ports:
